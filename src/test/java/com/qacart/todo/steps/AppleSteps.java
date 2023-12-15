@@ -14,6 +14,7 @@ public class AppleSteps {
     @Given("There are in the basket just {string}")
     public void thereAreInTheBasketJust(String basket) {
         System.out.println("There are in the basket just " + basket);
+        System.out.println("There are in the basket just " + basket);
     }
 
     @When("I can eat {int} right now")
