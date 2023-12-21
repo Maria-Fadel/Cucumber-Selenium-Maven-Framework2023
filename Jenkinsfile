@@ -5,7 +5,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 echo 'Building the project'
-                sh './mvn clean test'
+                sh 'mvn clean test'
                 // Add your build commands here
             }
         }
