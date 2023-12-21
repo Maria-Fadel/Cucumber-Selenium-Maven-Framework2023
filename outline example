@@ -1,0 +1,44 @@
+Feature: Todo features with Outline Example
+
+  Scenario Outline: Should be able to add a todo from outline and example
+    Given User log in the homepage
+    When add a new todo in the table <NewTodo>
+    Then check the todo table <check>
+
+    Examples:
+      | NewTodo  |check    |
+      | GutenTag |GutenTag |
+
+
+import com.example.todo.pages.todo.NewTodoPage;
+import com.example.todo.pages.todo.TodoPage;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import java.io.IOException;
+public class AddTodoWithOutlineExampleSteps {
+
+    WebDriver driver;
+    @Given("User log in the homepage")
+    public void userLogInTheHomepage() throws IOException {
+        driver = DriverFactory.getDriver();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.load("https://todo.qacart.com/login");
+        loginPage.login("hatem@example.com","Test1234");
+    }
+    @When("add a new todo in the table (.+)$")
+    public void add_a_new_todo_in_the_table(String NewTodo) throws Throwable {
+
+        new TodoPage(driver).plusButtomClick();
+        new NewTodoPage(driver).addTodo(NewTodo);
+    }
+
+
+    @Then("check the todo table (.+)$")
+    public void checkTheTodoTableNewTodo(String NewTodo) throws Throwable {
+        String message = new TodoPage(driver).getLastTodoText();
+        Assert.assertEquals(message,NewTodo);
+    }
+}
