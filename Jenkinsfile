@@ -2,13 +2,30 @@ pipeline {
     agent any
 
     stages {
-        stage('Run Tests') {
+        stage('Build') {
             steps {
-                echo 'Building the project'
-                sh 'mvn clean test'
-                // Add your build commands here
+                script {
+                    // Clean and build the Maven project
+                    sh 'mvn clean install'
+                }
             }
         }
 
+        stage('Test') {
+            steps {
+                script {
+                    // Run Cucumber tests using Maven
+                    sh 'mvn test'
+                }
+            }
+        }
+
+        stage('Archive') {
+            steps {
+                script {
+                    // Archive the artifacts (e.g., JAR files, reports)
+                    archiveArtifacts 'target/*.jar', 'target/cucumber-reports/**'
+                }
+            }
+        }
     }
-}
