@@ -11,6 +11,7 @@ public class AppleSteps {
     public void thereAreInTheBasketJust(int basket) {
         System.out.println("There are in the basket just " + basket);
         System.out.println("There are in the basket just " + basket);
+        System.out.println("Hallo Heilani");
     }
 
     @When("I can eat {int} right now")
