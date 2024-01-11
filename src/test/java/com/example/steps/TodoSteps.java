@@ -25,16 +25,16 @@ public class TodoSteps {
         loginPage.login(EnvUtils.getInstance().getEmail(),EnvUtils.getInstance().getPassword());
 
     }
-    @When("User add a new todo")
-    public void userAddANewTodo(){
+    @When("User add to the list a {string}")
+    public void userAddToTheListANewTodo(String newTodo){
 
         new TodoPage(driver).plusButtomClick();
-        new NewTodoPage(driver).addTodo("Learn Cucumber");
+        new NewTodoPage(driver).addTodo(newTodo);
     }
-    @Then("Todo should be added correctly")
-    public void shouldBeAddedCorrectly(){
+    @Then("The {string} should be added correctly")
+    public void theNewTodoShouldBeAddedCorrectly(String newTodo){
 
         String text = new TodoPage(driver).getLastTodoText();
-        Assert.assertEquals(text,"Learn Cucumber");
+        Assert.assertEquals(text,newTodo);
     }
 }

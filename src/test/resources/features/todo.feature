@@ -1,5 +1,12 @@
 Feature: Todo features
-  Scenario: Should be able to add a todo
+  Scenario Outline: Should be able to add a todo
     Given User is in the todos page
-    When User add a new todo
-    Then Todo should be added correctly
+    When User add to the list a "<new_todo>"
+    Then The "<new_todo>" should be added correctly
+
+    Examples:
+      |  new_todo   |
+      |     Java    |
+      |     Python  |
+      | JavaScript  |
+      |   HTML      |
